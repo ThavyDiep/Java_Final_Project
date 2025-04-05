@@ -1,0 +1,16 @@
+carrot
+broccoli
+tomato
+potato
+onion
+cabbage
+cucumber
+pumpkin
+garlic
+ginger
+lettuce
+eggplant
+mushroom
+chili
+corn
+
