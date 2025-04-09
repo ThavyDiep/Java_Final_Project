@@ -2,13 +2,14 @@ import java.io.*;
 import java.util.*;
 
 public class WordScrambleGame {
+    // File paths for different word categories
     private static final String FRUITS_FILE = "C:\\Users\\User\\IdeaProjects\\My Java program\\src\\fruits.txt";
     private static final String COUNTRIES_FILE = "C:\\Users\\User\\IdeaProjects\\My Java program\\src\\countries.txt";
     private static final String JOBS_FILE = "C:\\Users\\User\\IdeaProjects\\My Java program\\src\\jobs.txt";
     private static final String VEGETABLES_FILE = "C:\\Users\\User\\IdeaProjects\\My Java program\\src\\vegetables.txt";
     private static final String ANIMALS_FILE = "C:\\Users\\User\\IdeaProjects\\My Java program\\src\\animals.txt";
 
-
+//    Reads words from a file and stores them in a List.
         private static List<String> readWordsFromFile(String filePath) {
             List<String> words = new ArrayList<>();
             try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
@@ -21,7 +22,7 @@ public class WordScrambleGame {
             }
             return words;
         }
-
+//    Shuffles the characters of a word to create a scrambled version.
         private static String shuffleWord(String word) {
             List<Character> letters = new ArrayList<>();
             for (char c : word.toCharArray()) {
@@ -36,6 +37,7 @@ public class WordScrambleGame {
             return scrambled.toString();
         }
 
+    // Display category selection menu
         public static void main(String[] args) {
             Scanner scanner = new Scanner(System.in);
             Random random = new Random();
@@ -67,6 +69,7 @@ public class WordScrambleGame {
                     System.out.println("Oops! That's not a valid choice. Please select a number between 1 and 5.");
                 }
 
+                // Load words from the selected file
                 switch (choice) {
                     case 1:
                         selectedCategory = readWordsFromFile(FRUITS_FILE);
@@ -94,9 +97,10 @@ public class WordScrambleGame {
                     System.out.println("No words found in the file! Exiting game.");
                     return;
                 }
-                break;
+                break; // Exit the category selection loop and start the game
             }
 
+            //    Main game loop
             while (playAgain) {
                 String originalWord = selectedCategory.get(random.nextInt(selectedCategory.size()));
                 String scrambledWord = shuffleWord(originalWord);
@@ -104,6 +108,7 @@ public class WordScrambleGame {
                 System.out.println("\nUnscramble this word: " + scrambledWord);
                 int attempts = 3;
 
+                // Guessing loop
                 while (attempts > 0) {
                     System.out.print("Your guess (or type 'g' to give up this round): ");
                     String userGuess = scanner.nextLine().toLowerCase();
@@ -124,7 +129,7 @@ public class WordScrambleGame {
                         }
                     }
                 }
-
+//                Prompt to play again
                 String playAgainInput;
                 while (true) {
                     System.out.print("\nDo you want to play again? (y = yes, n = no): ");
@@ -142,6 +147,6 @@ public class WordScrambleGame {
                 }
             }
 
-            scanner.close();
+            scanner.close(); // close the scanner
         }
     }
